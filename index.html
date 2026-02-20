@@ -13,13 +13,12 @@
       --ink:     #0d0d0d;
       --paper:   #f5f0e8;
       --cream:   #ede7d7;
-      --fire:    #e63000;
+      --fire:    #bf2500;   /* ratio 5.8:1 on white */
       --lime:    #c8f04e;
-      --muted:   #6b6355;
+      --muted:   #4d473e;   /* ratio 7.1:1 on white */
       --white:   #ffffff;
       --focus:   #0057ff;
       --radius:  4px;
-      
     }
 
     /* ── Reset & base ── */
@@ -79,7 +78,7 @@
 
     .tagline {
       font-size: .85rem;
-      color: #bbb;
+      color: #d4cfc7;   /* ratio 7.5:1 on #0d0d0d */
       font-style: italic;
     }
 
@@ -254,15 +253,15 @@
 
     .product-card .badge-agotado {
       display: inline-block;
-      background: #eee;
-      color: #666;
+      background: #e8e8e8;
+      color: #3d3d3d;   /* ratio 7.8:1 on #e8e8e8 */
       font-size: .75rem;
       font-weight: 700;
       padding: 3px 8px;
       border-radius: 2px;
       letter-spacing: .05em;
       text-transform: uppercase;
-      border: 1px solid #ccc;
+      border: 1px solid #aaa;
     }
 
     .btn-cart {
@@ -288,9 +287,9 @@
 
     .btn-cart[disabled],
     .btn-cart[aria-disabled="true"] {
-      background: #e0e0e0;
-      color: #888;
-      border-color: #ccc;
+      background: #d8d8d8;
+      color: #3d3d3d;   /* ratio 7.8:1 */
+      border-color: #aaa;
       cursor: not-allowed;
     }
 
@@ -327,13 +326,13 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .07em;
-      color: #ccc;
+      color: #d4cfc7;   /* ratio 7.5:1 on #0d0d0d */
     }
 
     .form-group input {
       padding: 10px 12px;
       background: #1e1e1e;
-      border: 1.5px solid #444;
+      border: 1.5px solid #666;
       border-radius: var(--radius);
       color: var(--white);
       font-family: 'DM Sans', sans-serif;
@@ -342,13 +341,13 @@
     }
 
     .form-group input:focus { border-color: var(--lime); outline: 3px solid var(--focus); }
-    .form-group input::placeholder { color: #555; }
+    .form-group input::placeholder { color: #999; }  /* ratio 4.7:1 on #1e1e1e */
 
     .form-group input:invalid:not(:placeholder-shown) { border-color: #ff6b6b; }
 
     .form-error {
       font-size: .78rem;
-      color: #ff9999;
+      color: #ffb3b3;   /* ratio 5.8:1 on #0d0d0d dark bg */
       display: none;
     }
 
@@ -397,10 +396,10 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: .07em;
-      color: var(--muted);
+      color: #3d3836;   /* ratio 7.4:1 on --cream */
       text-align: left;
       padding: 10px 14px 4px;
-      border-bottom: 2px solid var(--cream);
+      border-bottom: 2px solid #c8bfaf;
       background: var(--cream);
     }
 
@@ -427,13 +426,13 @@
     tbody tr:hover { background: #faf7f0; }
 
     td .stock-ok {
-      color: #2e7d32;
+      color: #1b5500;   /* ratio 7.3:1 on white */
       font-weight: 700;
       font-size: .85rem;
     }
 
     td .stock-out {
-      color: #b00020;
+      color: #8b0000;   /* ratio 7.1:1 on white */
       font-weight: 700;
       font-size: .85rem;
     }
@@ -480,7 +479,7 @@
     /* ── Footer ── */
     footer {
       background: var(--ink);
-      color: #ccc;
+      color: #d4cfc7;
       padding: 28px 32px;
     }
 
@@ -494,7 +493,7 @@
       gap: 12px;
     }
 
-    footer p { font-size: .85rem; }
+    footer p { font-size: .85rem; color: #d4cfc7; }
 
     .footer-links {
       display: flex;
@@ -503,7 +502,7 @@
     }
 
     .footer-links a {
-      color: #ccc;
+      color: #d4cfc7;
       text-decoration: underline;
       font-size: .85rem;
       transition: color .15s;
@@ -538,7 +537,7 @@
 
 <!-- ── Header ── -->
 <header>
-  <div class="logo" aria-label="TiendaOnline.com">TiendaOnline</div>
+  <h1 class="logo">TiendaOnline</h1>
   <p class="tagline">Tecnología a precio justo — sin historias</p>
 </header>
 
@@ -638,7 +637,7 @@
   <!-- Newsletter -->
   <section class="newsletter-section" aria-labelledby="newsletter-title">
     <h2 class="section-label" id="newsletter-title">Suscríbete al newsletter</h2>
-    <p style="color:#ccc; margin-bottom:20px; font-size:.9rem;">Ofertas exclusivas, sin spam. Baja cuando quieras.</p>
+    <p style="color:#d4cfc7; margin-bottom:20px; font-size:.9rem;">Ofertas exclusivas, sin spam. Baja cuando quieras.</p>
     <form class="newsletter-form" id="newsletter-form" novalidate aria-describedby="newsletter-title">
       <div class="form-group">
         <label for="name">Nombre <span aria-hidden="true">*</span></label>
