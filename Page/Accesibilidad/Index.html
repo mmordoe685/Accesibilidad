@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>TiendaOnline — Ofertas de verdad</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TiendaOnline.com — Los mejores productos de tecnología al mejor precio. Laptop SuperPro 3000 y Smartphone XYZ disponibles ahora.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink:     #0d0d0d;
+      --paper:   #f5f0e8;
+      --cream:   #ede7d7;
+      --fire:    #e63000;
+      --lime:    #c8f04e;
+      --muted:   #6b6355;
+      --white:   #ffffff;
+      --focus:   #0057ff;
+      --radius:  4px;
+    }
+
+    /* ── Reset & base ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    /* ── Focus visible ── */
+    :focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+
+    /* ── Skip link ── */
+    .skip-link {
+      position: absolute;
+      top: -100px;
+      left: 12px;
+      background: var(--focus);
+      color: var(--white);
+      padding: 10px 18px;
+      font-weight: 700;
+      font-size: .9rem;
+      border-radius: var(--radius);
+      z-index: 9999;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* ── Header ── */
+    header {
+      background: var(--ink);
+      color: var(--white);
+      padding: 20px 32px;
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--lime);
+      line-height: 1;
+    }
+
+    .tagline {
+      font-size: .85rem;
+      color: #bbb;
+      font-style: italic;
+    }
+
+    /* ── Nav ── */
+    nav {
+      background: var(--cream);
+      border-bottom: 2px solid var(--ink);
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      padding: 0 24px;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 14px 18px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      color: var(--ink);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border-right: 1px solid var(--ink);
+      transition: background .15s, color .15s;
+    }
+
+    nav ul li:first-child a { border-left: 1px solid var(--ink); }
+
+    nav ul li a:hover,
+    nav ul li a[aria-current="page"] {
+      background: var(--ink);
+      color: var(--lime);
+    }
+
+    /* ── Main layout ── */
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 40px 24px 60px;
+    }
+
+    /* ── Section titles ── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(1.5rem, 3.5vw, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      border-bottom: 3px solid var(--ink);
+      padding-bottom: 8px;
+      margin-bottom: 24px;
+    }
+
+    /* ── Search ── */
+    .search-section { margin-bottom: 40px; }
+
+    .search-form {
+      display: flex;
+      gap: 0;
+      max-width: 480px;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .search-form label {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    .search-form input[type="search"] {
+      flex: 1;
+      padding: 12px 14px;
+      border: none;
+      background: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      color: var(--ink);
+    }
+
+    .search-form input[type="search"]::placeholder { color: #999; }
+    .search-form input[type="search"]:focus { outline: 3px solid var(--focus); outline-offset: 2px; }
+
+    .search-form button[type="submit"] {
+      padding: 12px 20px;
+      background: var(--ink);
+      color: var(--lime);
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .9rem;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+
+    .search-form button[type="submit"]:hover { background: var(--fire); color: var(--white); }
+
+    /* ── Products ── */
+    .products-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .product-card {
+      background: var(--white);
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .product-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .product-card__img-wrap {
+      background: var(--cream);
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-bottom: 2px solid var(--ink);
+    }
+
+    .product-card__img-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-card__body {
+      padding: 16px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .product-card h3 {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -.3px;
+      line-height: 1.2;
+    }
+
+    .product-card p.desc {
+      font-size: .88rem;
+      color: var(--muted);
+      flex: 1;
+    }
+
+    .product-card .price {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--fire);
+      line-height: 1;
+    }
+
+    .product-card .badge-agotado {
+      display: inline-block;
+      background: #eee;
+      color: #666;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 2px;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      border: 1px solid #ccc;
+    }
+
+    .btn-cart {
+      display: inline-block;
+      background: var(--lime);
+      color: var(--ink);
+      padding: 11px 18px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 700;
+      font-size: .88rem;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .15s, color .15s;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    .btn-cart:hover { background: var(--ink); color: var(--lime); }
+
+    .btn-cart[disabled],
+    .btn-cart[aria-disabled="true"] {
+      background: #e0e0e0;
+      color: #888;
+      border-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* ── Newsletter ── */
+    .newsletter-section {
+      background: var(--ink);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: 36px;
+      margin-bottom: 48px;
+    }
+
+    .newsletter-section .section-label {
+      color: var(--lime);
+      border-bottom-color: var(--lime);
+    }
+
+    .newsletter-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 24px;
+      max-width: 600px;
+    }
+
+    @media (max-width: 560px) {
+      .newsletter-form { grid-template-columns: 1fr; }
+    }
+
+    .form-group { display: flex; flex-direction: column; gap: 6px; }
+
+    .form-group label {
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: #ccc;
+    }
+
+    .form-group input {
+      padding: 10px 12px;
+      background: #1e1e1e;
+      border: 1.5px solid #444;
+      border-radius: var(--radius);
+      color: var(--white);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 1rem;
+      transition: border-color .15s;
+    }
+
+    .form-group input:focus { border-color: var(--lime); outline: 3px solid var(--focus); }
+    .form-group input::placeholder { color: #555; }
+
+    .form-group input:invalid:not(:placeholder-shown) { border-color: #ff6b6b; }
+
+    .form-error {
+      font-size: .78rem;
+      color: #ff9999;
+      display: none;
+    }
+
+    .form-group input:invalid:not(:placeholder-shown) + .form-error { display: block; }
+
+    .newsletter-form .full-row {
+      grid-column: 1 / -1;
+    }
+
+    .btn-subscribe {
+      background: var(--lime);
+      color: var(--ink);
+      border: none;
+      padding: 13px 28px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: .95rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border-radius: var(--radius);
+      cursor: pointer;
+      transition: background .15s, color .15s;
+    }
+
+    .btn-subscribe:hover { background: var(--fire); color: var(--white); }
+
+    /* ── Comparison table ── */
+    .compare-section { margin-bottom: 48px; }
+
+    .table-wrap {
+      overflow-x: auto;
+      border: 2px solid var(--ink);
+      border-radius: var(--radius);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      background: var(--white);
+      min-width: 360px;
+    }
+
+    caption {
+      font-family: 'Syne', sans-serif;
+      font-size: .85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--muted);
+      text-align: left;
+      padding: 10px 14px 4px;
+      border-bottom: 2px solid var(--cream);
+      background: var(--cream);
+    }
+
+    thead tr { background: var(--ink); color: var(--white); }
+
+    th, td {
+      padding: 13px 16px;
+      text-align: left;
+      border-bottom: 1px solid #e0d9cc;
+    }
+
+    thead th {
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      border-bottom: none;
+    }
+
+    tbody tr:last-child td,
+    tbody tr:last-child th { border-bottom: none; }
+
+    tbody tr:hover { background: #faf7f0; }
+
+    td .stock-ok {
+      color: #2e7d32;
+      font-weight: 700;
+      font-size: .85rem;
+    }
+
+    td .stock-out {
+      color: #b00020;
+      font-weight: 700;
+      font-size: .85rem;
+    }
+
+    /* ── CTA banner ── */
+    .cta-banner {
+      background: var(--fire);
+      color: var(--white);
+      padding: 24px 28px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .cta-banner p {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+    }
+
+    .btn-cta {
+      background: var(--white);
+      color: var(--fire);
+      padding: 12px 24px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: .9rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      border: 2px solid var(--white);
+      border-radius: var(--radius);
+      text-decoration: none;
+      display: inline-block;
+      transition: background .15s, color .15s, border-color .15s;
+      white-space: nowrap;
+    }
+
+    .btn-cta:hover { background: var(--fire); color: var(--white); border-color: var(--white); }
+
+    /* ── Footer ── */
+    footer {
+      background: var(--ink);
+      color: #ccc;
+      padding: 28px 32px;
+    }
+
+    .footer-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    footer p { font-size: .85rem; }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #ccc;
+      text-decoration: underline;
+      font-size: .85rem;
+      transition: color .15s;
+    }
+
+    .footer-links a:hover { color: var(--lime); }
+
+    /* ── Live region ── */
+    #cart-status {
+      position: absolute;
+      width: 1px; height: 1px;
+      overflow: hidden; clip: rect(0,0,0,0);
+      white-space: nowrap;
+    }
+
+    /* ── Reduced motion ── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Skip link -->
+<a href="#contenido" class="skip-link">Saltar al contenido principal</a>
+
+<!-- Live region for cart feedback -->
+<div id="cart-status" role="status" aria-live="polite" aria-atomic="true"></div>
+
+<!-- ── Header ── -->
+<header>
+  <div class="logo" aria-label="TiendaOnline.com">TiendaOnline</div>
+  <p class="tagline">Tecnología a precio justo — sin historias</p>
+</header>
+
+<!-- ── Navigation ── -->
+<nav aria-label="Navegación principal">
+  <ul>
+    <li><a href="#" aria-current="page">Inicio</a></li>
+    <li><a href="#">Productos</a></li>
+    <li><a href="#">Ofertas</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</nav>
+
+<!-- ── Main ── -->
+<main id="contenido">
+
+  <!-- Búsqueda -->
+  <section class="search-section" aria-label="Buscar productos">
+    <h2 class="section-label">Productos Destacados</h2>
+    <form class="search-form" role="search" aria-label="Buscar en el catálogo">
+      <label for="search">Buscar productos</label>
+      <input
+        id="search"
+        type="search"
+        name="q"
+        placeholder="Buscar productos…"
+        autocomplete="off"
+        aria-label="Buscar productos"
+      >
+      <button type="submit">Buscar</button>
+    </form>
+  </section>
+
+  <!-- Productos -->
+  <section aria-label="Catálogo de productos destacados">
+    <div class="products-grid">
+
+      <!-- Laptop -->
+      <article aria-labelledby="prod1-title">
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <img
+              src="laptop.jpg"
+              alt="Laptop SuperPro 3000 de color negro, vista frontal"
+              width="400"
+              height="300"
+            >
+          </div>
+          <div class="product-card__body">
+            <h3 id="prod1-title">Laptop SuperPro 3000</h3>
+            <p class="desc">Procesador último modelo · 16 GB RAM · 512 GB SSD</p>
+            <p class="price" aria-label="Precio: 999 dólares">$999</p>
+            <button
+              class="btn-cart"
+              type="button"
+              aria-label="Añadir Laptop SuperPro 3000 al carrito de compra"
+              data-product="Laptop SuperPro 3000"
+            >
+              + Añadir al carrito
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Smartphone -->
+      <article aria-labelledby="prod2-title">
+        <div class="product-card">
+          <div class="product-card__img-wrap">
+            <img
+              src="phone.jpg"
+              alt="Smartphone XYZ negro con pantalla de 6,5 pulgadas"
+              width="400"
+              height="300"
+            >
+          </div>
+          <div class="product-card__body">
+            <h3 id="prod2-title">Smartphone XYZ</h3>
+            <p class="desc">Pantalla 6,5&Prime; · Cámara 48 MP · Batería 5000 mAh</p>
+            <p class="price" aria-label="Precio: 599 dólares">$599</p>
+            <span class="badge-agotado" aria-label="Estado: agotado">Agotado</span>
+            <button
+              class="btn-cart"
+              type="button"
+              aria-label="Smartphone XYZ — actualmente agotado, no disponible para compra"
+              aria-disabled="true"
+              disabled
+            >
+              No disponible
+            </button>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- Newsletter -->
+  <section class="newsletter-section" aria-labelledby="newsletter-title">
+    <h2 class="section-label" id="newsletter-title">Suscríbete al newsletter</h2>
+    <p style="color:#ccc; margin-bottom:20px; font-size:.9rem;">Ofertas exclusivas, sin spam. Baja cuando quieras.</p>
+    <form class="newsletter-form" id="newsletter-form" novalidate aria-describedby="newsletter-title">
+      <div class="form-group">
+        <label for="name">Nombre <span aria-hidden="true">*</span></label>
+        <input
+          id="name"
+          type="text"
+          name="name"
+          required
+          aria-required="true"
+          placeholder="Tu nombre"
+          autocomplete="given-name"
+        >
+        <span class="form-error" role="alert" id="name-error">Por favor, introduce tu nombre.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Correo electrónico <span aria-hidden="true">*</span></label>
+        <input
+          id="email"
+          type="email"
+          name="email"
+          required
+          aria-required="true"
+          placeholder="tu@correo.com"
+          autocomplete="email"
+          aria-describedby="email-error"
+        >
+        <span class="form-error" role="alert" id="email-error">Introduce un correo electrónico válido.</span>
+      </div>
+
+      <div class="full-row">
+        <button class="btn-subscribe" type="submit">Suscribirme gratis →</button>
+      </div>
+    </form>
+  </section>
+
+  <!-- Tabla comparativa -->
+  <section class="compare-section" aria-labelledby="compare-title">
+    <h2 class="section-label" id="compare-title">Comparar Productos</h2>
+    <div class="table-wrap">
+      <table>
+        <caption>Comparación de productos: precio y disponibilidad</caption>
+        <thead>
+          <tr>
+            <th scope="col">Producto</th>
+            <th scope="col">Precio</th>
+            <th scope="col">Disponibilidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Laptop SuperPro 3000</th>
+            <td>$999</td>
+            <td><span class="stock-ok" aria-label="En stock">✓ Disponible</span></td>
+          </tr>
+          <tr>
+            <th scope="row">Smartphone XYZ</th>
+            <td>$599</td>
+            <td><span class="stock-out" aria-label="Sin stock">✗ Agotado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <div class="cta-banner" role="region" aria-label="Oferta especial">
+    <p>🔥 Oferta flash — solo hasta el domingo. ¡No te quedes sin la tuya!</p>
+    <a href="#" class="btn-cta">Ver oferta especial</a>
+  </div>
+
+</main>
+
+<!-- ── Footer ── -->
+<footer>
+  <div class="footer-inner">
+    <p>© 2024 TiendaOnline.com — Todos los derechos reservados.<br>
+      <small>Última actualización: 16/02/2026</small>
+    </p>
+    <nav class="footer-links" aria-label="Pie de página">
+      <a href="#">Política de Privacidad</a>
+      <a href="#">Términos y Condiciones</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // ── Carrito: feedback accesible ──
+  document.querySelectorAll('.btn-cart:not([disabled])').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const product = btn.dataset.product;
+      const status = document.getElementById('cart-status');
+      status.textContent = '';
+      requestAnimationFrame(() => {
+        status.textContent = `${product} añadida al carrito.`;
+      });
+      btn.textContent = '✓ En el carrito';
+      btn.setAttribute('aria-label', `${product} añadida al carrito`);
+      btn.disabled = true;
+      btn.setAttribute('aria-disabled', 'true');
+    });
+  });
+
+  // ── Newsletter: validación accesible ──
+  const form = document.getElementById('newsletter-form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    let first = null;
+
+    form.querySelectorAll('[required]').forEach(input => {
+      const valid = input.validity.valid;
+      const errorEl = document.getElementById(input.id + '-error');
+      if (!valid) {
+        input.setAttribute('aria-invalid', 'true');
+        if (errorEl) errorEl.style.display = 'block';
+        if (!first) first = input;
+      } else {
+        input.removeAttribute('aria-invalid');
+        if (errorEl) errorEl.style.display = 'none';
+      }
+    });
+
+    if (first) {
+      first.focus();
+    } else {
+      const status = document.getElementById('cart-status');
+      status.textContent = '¡Suscripción realizada con éxito! Gracias.';
+      form.reset();
+    }
+  });
+</script>
+
+</body>
+</html>
